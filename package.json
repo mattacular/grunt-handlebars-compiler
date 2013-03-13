@@ -1,0 +1,40 @@
+{
+	"name": "grunt-handlebars-compiler",
+	"description": "Grunt tasks to precompile Handlebars.js templates",
+	"version": "0.0.1",
+	"homepage": "https://github.com/mattacular/grunt-handlebars-compiler",
+	"author": {
+		"name": "Matt Stills",
+		"email": "mattacular@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/mattacular/grunt-handlebars-compiler.git"
+	},
+	"bugs": {
+		"url": "https://github.com/mattacular/grunt-handlebars-compiler/issues"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/mattacular/grunt-handlebars-compiler/blob/master/LICENSE-MIT"
+		}
+	],
+	"main": "grunt.js",
+	"bin": {
+		"grunt-handlebars-compiler": "bin/grunt-handlebars-compiler"
+	},
+	"engines": {
+		"node": "*"
+	},
+	"dependencies": {
+		"handlebars": "*"
+	},
+	"devDependencies": {
+		"grunt": "~0.3.17"
+	},
+	"keywords": [
+		"gruntplugin",
+		"handlebars"
+	]
+}
