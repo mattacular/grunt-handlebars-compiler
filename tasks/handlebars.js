@@ -7,12 +7,10 @@
  */
 module.exports = function(grunt) {
 	var _,
-		//helpers,
 		defaultProcessName,
 		defaultProcessPartialName;
 
 	_ = grunt.util._;
-	//helpers = require('grunt-lib-contrib').init(grunt);
 
 	// filename conversion for templates and partials
 	defaultProcessFilename = function (filePath) {
