@@ -15,11 +15,11 @@ module.exports = function(grunt) {
 	// filename conversion for templates and partials
 	defaultProcessFilename = function (filePath) {
 		var pieces = _.last(filePath.split('/')).split('.'),
-			name   = _(pieces).without(_.last(pieces)).join('.'); // strips file extension
-		return name.substr(0, name.length);
+			name   = _(pieces).without(_.last(pieces)).join('-'); // strips file extension
+		return name;
 	};
 
-	grunt.registerMultiTask('handlebars', 'Compile handlebars templates and partials into Handlebars namespace.', function() {
+	grunt.registerMultiTask('handlebars', 'Compile *.handlebars templates into the Handlebars namespace.', function () {
 		var options = this.options({
 				separator: grunt.util.linefeed + grunt.util.linefeed,
 				namespace: 'Handlebars.templates'
