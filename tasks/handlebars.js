@@ -24,7 +24,6 @@ module.exports = function(grunt) {
 	grunt.registerMultiTask('handlebars', 'Compile handlebars templates and partials into Handlebars namespace.', function() {
 		var options = this.options({
 				separator: grunt.util.linefeed + grunt.util.linefeed,
-				wrapped: true,
 				namespace: 'Handlebars.templates'
 			}),
 			processFilename;
