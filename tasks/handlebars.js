@@ -7,18 +7,18 @@
  */
 module.exports = function(grunt) {
 	var _,
-		helpers,
+		//helpers,
 		defaultProcessName,
 		defaultProcessPartialName;
 
 	_ = grunt.util._;
-	helpers = require('grunt-lib-contrib').init(grunt);
+	//helpers = require('grunt-lib-contrib').init(grunt);
 
 	// filename conversion for templates and partials
 	defaultProcessFilename = function (filePath) {
 		var pieces = _.last(filePath.split('/')).split('.'),
 			name   = _(pieces).without(_.last(pieces)).join('.'); // strips file extension
-		return name.substr(1, name.length);                       // strips leading _ character
+		return name.substr(0, name.length);
 	};
 
 	grunt.registerMultiTask('handlebars', 'Compile handlebars templates and partials into Handlebars namespace.', function() {
@@ -27,13 +27,9 @@ module.exports = function(grunt) {
 				wrapped: true,
 				namespace: 'Handlebars.templates'
 			}),
-			isPartial,
 			processFilename;
 
 		grunt.verbose.writeflags(options, 'Options');
-
-		// assign regex for partial detection
-		isPartial = options.partialRegex || /^_/;
 
 		// assign filename processing (this decides template name under namespace)
 		processFilename = options.processFilename || defaultProcessFilename;
@@ -66,16 +62,11 @@ module.exports = function(grunt) {
 					grunt.fail.warn('Handlebars failed to compile '+filepath+'.');
 				}
 
-				// register partial or add template to namespace
-				if (isPartial.test(_.last(filepath.split('/')))) {
-					partials.push('Handlebars.registerPartial('+JSON.stringify(filename)+', '+compiled+');');
-				} else {
-					compiled = '(function() {\n' + 
-								'var template = Handlebars.template, templates = ' + options.namespace + ' = ' + options.namespace + ' || {};\n' + 
-								'templates[\'' + filename + '\'] = template(' + compiled + ');\n})();');
+				compiled = '(function() {\n' + 
+							'var template = Handlebars.template, templates = ' + options.namespace + ' = ' + options.namespace + ' || {};\n' + 
+							'templates[\'' + filename + '\'] = template(' + compiled + ');\n})();';
 
-					templates.push(compiled);
-				}
+				templates.push(compiled);
 			});
 
 			output = partials.concat(templates);
