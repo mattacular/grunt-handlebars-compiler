@@ -5,7 +5,6 @@
  *	Copyright (c) 2013 mstills
  *	Licensed under the MIT license.
  */
-
 module.exports = function (grunt) {
 	'use strict';
 
@@ -39,12 +38,12 @@ module.exports = function (grunt) {
 					namespace: 'myApp.templates'
 				}
 			},
-			'prepVanilla': {
+			prepVanilla: {
 				'files': {
 					'test/expected/helloWorld.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				}
 			},
-			'prepNamespace': {
+			prepNamespace: {
 				files: { 
 					'test/expected/helloWorld-namespace.compiled.js': 'test/fixtures/helloWorld.handlebars' 
 				},
@@ -66,8 +65,11 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-nodeunit');
 	grunt.loadNpmTasks('grunt-contrib-internal');
 
+	// 'prepTest' should be run once a stable build has been confirmed (ie. creates new 'expected' files)
 	grunt.registerTask('prepTest', ['clean', 'handlebars:prepVanilla', 'handlebars:prepNamespace']);
+	// run tests with nodeunit
 	grunt.registerTask('test', ['clean', 'handlebars:vanilla', 'handlebars:namespace', 'nodeunit']);
+	// lint and test before declaring a revision stable
 	grunt.registerTask('default', ['jshint', 'test']);
 
 };
