@@ -6,9 +6,10 @@
  *	Licensed under the MIT license.
  */
 module.exports = function(grunt) {
+	'use strict';
+	
 	var _,
-		defaultProcessName,
-		defaultProcessPartialName;
+		defaultProcessFilename;
 
 	_ = grunt.util._;
 
