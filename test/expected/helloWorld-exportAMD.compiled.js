@@ -1,5 +1,5 @@
-(function() {
-var template = Handlebars.template, templates = myApp.templates = myApp.templates || {};
+define(['handlebars'], function (Handlebars) {
+var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['helloWorld'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Handlebars.helpers; data = data || {};
@@ -17,4 +17,4 @@ helpers = helpers || Handlebars.helpers; data = data || {};
     + "</div>\n	</body>\n</html>";
   return buffer;
   });
-}());
+});

@@ -17,4 +17,4 @@ helpers = helpers || Handlebars.helpers; data = data || {};
     + "</div>\n	</body>\n</html>";
   return buffer;
   });
-})();
+}());

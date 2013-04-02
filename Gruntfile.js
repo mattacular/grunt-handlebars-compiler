@@ -29,6 +29,33 @@ module.exports = function (grunt) {
 					'tmp/out.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				}
 			},
+			// strip template root option
+			templateRoot: {
+				files: {
+					'tmp/out-templateRoot.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					templateRoot: 'hello'	// should compile to Handlebar.templates.World
+				}
+			},
+			// strip template root option
+			exportAMD: {
+				files: {
+					'tmp/out-exportAMD.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					exportAMD: true
+				}
+			},
+			// strip template root option
+			exportCommonJS: {
+				files: {
+					'tmp/out-exportCommonJS.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					exportCommonJS: 'handlebars'
+				}
+			},
 			// test namespace option
 			namespace: {
 				files: {
@@ -50,6 +77,30 @@ module.exports = function (grunt) {
 				options: {
 					namespace: 'myApp.templates' 
 				}
+			},
+			prepExportCommonJS: {
+				files: { 
+					'test/expected/helloWorld-exportCommonJS.compiled.js': 'test/fixtures/helloWorld.handlebars' 
+				},
+				options: {
+					exportCommonJS: 'handlebars' 
+				}
+			},
+			prepExportAMD: {
+				files: { 
+					'test/expected/helloWorld-exportAMD.compiled.js': 'test/fixtures/helloWorld.handlebars' 
+				},
+				options: {
+					exportAMD: true
+				}
+			},
+			prepTemplateRoot: {
+				files: { 
+					'test/expected/helloWorld-templateRoot.compiled.js': 'test/fixtures/helloWorld.handlebars' 
+				},
+				options: {
+					templateRoot: 'hello' 
+				}
 			}
 		},
 		// test suite
@@ -66,9 +117,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-internal');
 
 	// 'prepTest' should be run once a stable build has been confirmed (ie. creates new 'expected' files)
-	grunt.registerTask('prepTest', ['clean', 'handlebars:prepVanilla', 'handlebars:prepNamespace']);
+	grunt.registerTask('prepTest', ['clean', 'handlebars:prepVanilla', 'handlebars:prepNamespace', 'handlebars:prepTemplateRoot', 'handlebars:prepExportAMD', 'handlebars:prepExportCommonJS']);
 	// run tests with nodeunit
-	grunt.registerTask('test', ['clean', 'handlebars:vanilla', 'handlebars:namespace', 'nodeunit']);
+	grunt.registerTask('test', ['clean', 'handlebars:vanilla', 'handlebars:namespace', 'handlebars:templateRoot', 'handlebars:exportAMD', 'handlebars:exportCommonJS', 'nodeunit']);
 	// lint and test before declaring a revision stable
 	grunt.registerTask('default', ['jshint', 'test']);
 

@@ -4,20 +4,47 @@ var grunt	= require('grunt'),
 exports.handlebars = function (test) {
 	'use strict';
 
-	var actual, expected, nsActual, nsExpected;
+	var i, actual, expected, activeTest, tests;
 
-	test.expect(2);
+	// define tests for the handlebars task here
+	tests = [
+		{
+			name: 'vanilla',
+			prefix: '',
+			assertion: 'The vanilla compiled output should match the clean (prepped) build'
+		},
+		{
+			name: 'namespace',
+			prefix: '-namespace',
+			assertion: 'The namespace compiled output should match the clean (prepped) build'
+		},
+		{
+			name: 'exportAMD',
+			prefix: '-exportAMD',
+			assertion: 'The output compiled as a AMD module should match the clean (prepped) build'
+		},
+		{
+			name: 'exportCommonJS',
+			prefix: '-exportCommonJS',
+			assertion: 'The output compiled as a Common JS module should match the clean (prepped) build'
+		},
+		{
+			name: 'templateRoot',
+			prefix: '-templateRoot',
+			assertion: 'The templateRoot should have been stripped to match the clean (prepped) build'
+		}
+	];
 
-	// test vanilla run-through
-	actual = grunt.file.read('tmp/out.compiled.js');
-	expected = grunt.file.read('test/expected/helloWorld.compiled.js');
+	test.expect(tests.length);
 
-	// test namespace run-through
-	nsActual = grunt.file.read('tmp/out-namespace.compiled.js');
-	nsExpected = grunt.file.read('test/expected/helloWorld-namespace.compiled.js');
+	for (i = 0; i < tests.length; i += 1) {
+		activeTest = tests[i];
 
-	test.equal(expected, actual, 'The vanilla compiled output should match the clean (expected) build');
-	test.equal(nsExpected, nsActual, 'The namespace compiled output should match the clean (expected) build');
+		actual = grunt.file.read('tmp/out' + activeTest.prefix + '.compiled.js');
+		expected = grunt.file.read('test/expected/helloWorld' + activeTest.prefix + '.compiled.js');
+
+		test.equal(actual, expected, activeTest.assertion);
+	}
 
 	test.done();
 };
