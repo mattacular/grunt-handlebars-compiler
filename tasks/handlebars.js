@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 				knownHelpers: [],			// provide an array of known helpers
 				knownOnly: false,			// compile known helpers only
 				templateRoot: false,		// base value to strip from template names
-				partial: false,				// specify that template is a partial
+				partial: false				// specify that templates are partials
 			}),
 			compilerOptions = {},
 			processFilename,
@@ -98,7 +98,7 @@ module.exports = function(grunt) {
 				if (options.templateRoot && filename.indexOf(options.templateRoot) === 0) {
 					filename = filename.replace(options.templateRoot, '');
 					filepath[(filepath.length - 1)] = filename;
-					grunt.log.writeln('Found templateRoot and stripped from template name: ' + filename);
+					grunt.log.writeln('Found templateRoot and stripped it from the template name: "' + filename + '"');
 				}
 
 				filepath = filepath.join('/');
@@ -122,18 +122,13 @@ module.exports = function(grunt) {
 
 				// finally, put it all back together
 				compiled = prefix + midfix + wrapOpen + compiled + wrapClose + suffix;
-
-				// compiled = '(function() {\n' + 
-				// 			'var template = Handlebars.template, templates = ' + options.namespace + ' = ' + options.namespace + ' || {};\n' + 
-				// 			'templates[\'' + filename + '\'] = template(' + compiled + ');\n})();';
-
 				templates.push(compiled);
 			});
 
 			output = partials.concat(templates);
 
 			if (output.length < 1) {
-				grunt.log.warn('Destination not written because compiled files were empty.');
+				grunt.log.warn('Destination not written because there was no output.');
 			} else {
 				grunt.file.write(f.dest, output.join(grunt.util.normalizelf(options.separator)));
 				grunt.log.writeln('File "' + f.dest + '" created.');
