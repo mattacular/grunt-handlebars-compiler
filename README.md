@@ -57,7 +57,7 @@ The `handlebars` task has the following options, none of which are required. The
 
 ```js
 	{
-		separator: '/n',					// specify character to delimit individual compiled files in the output
+		separator: '\n',					// specify character to delimit individual compiled files in the output
 		namespace: 'Handlebars.templates',	// specify the namespace for templates to be registered to
 		exportAMD: false,					// export compiled templates as AMD (RequireJS) module
 		exportCommonJS: false,				// export as Common JS, provide string path to Handlebars instead of false
