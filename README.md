@@ -34,12 +34,16 @@ This allows you to use the 'handlebars' task to specify targets!
 		},
 		some: {
 			/*
-				The output will register two templates under myApp.templates namespace after stripping the templateRoot:
+				The output will register two templates under myApp.templates namespace after stripping the 
+				templateRoot:
 					* myApp.templates.template1
 					* myApp.templates.templae2
 			*/
 			files: {
-				'pkg/template-compile-test2.js': ['template/webApp-template1.handlebars', 'web-Apptemplate/template2.handlebars'] 
+				'pkg/template-compile-test2.js': [
+					'template/webApp-template1.handlebars', 
+					'web-Apptemplate/template2.handlebars'
+				] 
 			},
 			options: {
 				namespace: 'myApp.templates',
@@ -53,15 +57,15 @@ The `handlebars` task has the following options, none of which are required. The
 
 ```js
 	{
-		separator: '/n',						// specify character to delimit individual compiled files in the output
-		namespace: 'Handlebars.templates',		// specify the namespace for templates to be registered to
-		exportAMD: false,						// export compiled templates as AMD (RequireJS) module
-		exportCommonJS: false,					// export as Common JS, provide string path to Handlebars instead of false
-		pathToHandlebars: '',					// only relevant if 'exportAMD === true' - provide path to Handlebars
-		knownHelpers: [],						// provide an array of known helpers
-		knownOnly: false,						// compile known helpers only (requires 'knownHelpers')
-		templateRoot: false,					// a value to strip from the beginning of template names
-		partial: false							// specify that templates these templates are partials
+		separator: '/n',					// specify character to delimit individual compiled files in the output
+		namespace: 'Handlebars.templates',	// specify the namespace for templates to be registered to
+		exportAMD: false,					// export compiled templates as AMD (RequireJS) module
+		exportCommonJS: false,				// export as Common JS, provide string path to Handlebars instead of false
+		pathToHandlebars: '',				// only relevant if 'exportAMD === true' - provide path to Handlebars
+		knownHelpers: [],					// provide an array of known helpers
+		knownOnly: false,					// compile known helpers only (requires 'knownHelpers')
+		templateRoot: false,				// a value to strip from the beginning of template names
+		partial: false						// specify that templates these templates are partials
 	}
 ```
 
