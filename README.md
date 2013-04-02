@@ -75,6 +75,8 @@ The `handlebars` task is a [multi task](https://github.com/gruntjs/grunt/blob/ma
 
 ## Changelog
 
+* v0.0.6: added options to export as AMD or Common JS modules
+* v0.0.5: tests!
 * v0.0.1: Initial release (alpha)
 
 ## Contributing
