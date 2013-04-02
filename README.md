@@ -21,28 +21,47 @@ This allows you to use the 'handlebars' task to specify targets!
 ```js
 	handlebars: {
 		all: {
+			/*
+				The output will be formatted as a Common JS module, using a require()
+				statement where the argument is the Handlebars path provided in the option.
+			*/
 			files: {
 				'pkg/template-compile-test.js': 'template/*.handlebars'
+			},
+			options: {
+				exportCommonJS: 'handlebars'
 			}
 		},
 		some: {
+			/*
+				The output will register two templates under myApp.templates namespace after stripping the templateRoot:
+					* myApp.templates.template1
+					* myApp.templates.templae2
+			*/
 			files: {
-				'pkg/template-compile-test2.js': ['template/template1.handlebars', 'template/template2.handlebars'] 
+				'pkg/template-compile-test2.js': ['template/webApp-template1.handlebars', 'web-Apptemplate/template2.handlebars'] 
 			},
 			options: {
-				namespace: 'myApp.templates'
+				namespace: 'myApp.templates',
+				templateRoot: 'webApp-'
 			}
 		}
 	}
 ```
 
-The `handlebars` task has the following options, none of which are required:
+The `handlebars` task has the following options, none of which are required. The defaults are shown:
 
 ```js
 	{
-		separator: '',					// custom separator to put between concatenated files
-		namespace: 'myApp.template',	// pick a template namespace, default is 'Handlebars.templates'
-		processFilename: function () {}	// provide a custom function to process the template filename (takes full path to template as argument). by default, path and file extension are stripped.
+		separator: '/n',						// specify character to delimit individual compiled files in the output
+		namespace: 'Handlebars.templates',		// specify the namespace for templates to be registered to
+		exportAMD: false,						// export compiled templates as AMD (RequireJS) module
+		exportCommonJS: false,					// export as Common JS, provide string path to Handlebars instead of false
+		pathToHandlebars: '',					// only relevant if 'exportAMD === true' - provide path to Handlebars
+		knownHelpers: [],						// provide an array of known helpers
+		knownOnly: false,						// compile known helpers only (requires 'knownHelpers')
+		templateRoot: false,					// a value to strip from the beginning of template names
+		partial: false							// specify that templates these templates are partials
 	}
 ```
 
