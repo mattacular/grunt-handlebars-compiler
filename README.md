@@ -37,12 +37,12 @@ This allows you to use the 'handlebars' task to specify targets!
 				The output will register two templates under myApp.templates namespace after stripping the 
 				templateRoot:
 					* myApp.templates.template1
-					* myApp.templates.templae2
+					* myApp.templates.template2
 			*/
 			files: {
 				'pkg/template-compile-test2.js': [
 					'template/webApp-template1.handlebars', 
-					'web-Apptemplate/template2.handlebars'
+					'template/webApp-template2.handlebars'
 				] 
 			},
 			options: {
