@@ -79,7 +79,7 @@ The `handlebars` task is a [multi task](https://github.com/gruntjs/grunt/blob/ma
 
 ## Contributing
 
-Feel free to fork if you see possible improvements or contact me directly if you want to contribute to this project: [mattacular@gmail.com][mailto:mattacular@gmail.com]
+Feel free to fork if you see possible improvements or contact me directly if you want to contribute to this project: mattacular@gmail.com
 
 ## Author
 
