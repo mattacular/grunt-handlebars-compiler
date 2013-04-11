@@ -36,8 +36,8 @@ This allows you to use the 'handlebars' task to specify targets!
 		},
 		some: {
 			/*
-				The output will register two templates under myApp.templates namespace after stripping the 
-				templateRoot:
+				The output will be set to register two templates under 'myApp.templates' namespace after 
+				stripping the templateRoot:
 					* myApp.templates.template1
 					* myApp.templates.template2
 			*/
@@ -60,7 +60,7 @@ The `handlebars` task has the following options, none of which are required. The
 ```js
 	{
 		separator: '\n',					// specify a character to delimit individual compiled files in the output
-		namespace: 'Handlebars.templates',	// specify a namespace for templates to be registered to
+		namespace: 'Handlebars.templates',	// specify a namespace for templates to be set to register to
 		exportAMD: false,					// export compiled templates as AMD (RequireJS) module
 		exportCommonJS: false,				// export as Common JS, provide string path to Handlebars instead of false
 		pathToHandlebars: '',				// only relevant if 'exportAMD === true' - provide path to Handlebars
