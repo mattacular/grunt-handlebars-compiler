@@ -4,6 +4,8 @@ A [Grunt](http://gruntjs.com) plugin for pre-compiling Handlebars templates to a
 
 ## Getting Started
 
+**IMPORTANT**: This plugin requires Grunt 0.4 or higher - it is recommended that you always run the latest version)
+
 Install the task:
 
 ```bash
@@ -53,12 +55,12 @@ This allows you to use the 'handlebars' task to specify targets!
 	}
 ```
 
-The `handlebars` task has the following options, none of which are required. The defaults are shown:
+The `handlebars` task has the following options, none of which are required. The defaults are shown here:
 
 ```js
 	{
-		separator: '\n',					// specify character to delimit individual compiled files in the output
-		namespace: 'Handlebars.templates',	// specify the namespace for templates to be registered to
+		separator: '\n',					// specify a character to delimit individual compiled files in the output
+		namespace: 'Handlebars.templates',	// specify a namespace for templates to be registered to
 		exportAMD: false,					// export compiled templates as AMD (RequireJS) module
 		exportCommonJS: false,				// export as Common JS, provide string path to Handlebars instead of false
 		pathToHandlebars: '',				// only relevant if 'exportAMD === true' - provide path to Handlebars
@@ -68,6 +70,8 @@ The `handlebars` task has the following options, none of which are required. The
 		partial: false						// specify that templates these templates are partials
 	}
 ```
+
+Note: You may choose only one 'exportX' option. *(Eg. you can't use exportAMD and exportCommonJS on the same task. That would just be straight silly.)*
 
 ## Documentation
 
