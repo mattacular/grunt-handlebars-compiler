@@ -4,7 +4,7 @@ A [Grunt](http://gruntjs.com) plugin for pre-compiling Handlebars templates to a
 
 ## Getting Started
 
-**IMPORTANT**: This plugin requires Grunt 0.4 or higher - it is recommended that you always run the latest version)
+***IMPORTANT**: This plugin requires Grunt 0.4 or higher - it is recommended that you always run the latest version
 
 Install the task:
 
@@ -79,13 +79,13 @@ The `handlebars` task is a [multi task](https://github.com/gruntjs/grunt/blob/ma
 
 ## Changelog
 
-* v0.0.6: added options to export as AMD or Common JS modules
+* v0.0.6: added various options, including ability to export as AMD or Common JS modules
 * v0.0.5: tests!
 * v0.0.1: Initial release (alpha)
 
 ## Contributing
 
-Feel free to fork if you see possible improvements or contact me directly if you want to contribute to this project: mattacular@gmail.com
+Feel free to fork if you see possible improvements or contact me directly if you want to contribute to this project (or just submit a pull request): mattacular@gmail.com
 
 ## Author
 
