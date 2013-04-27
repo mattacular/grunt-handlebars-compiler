@@ -8,10 +8,8 @@
 module.exports = function(grunt) {
 	'use strict';
 	
-	var _,
+	var _ = grunt.util._,
 		defaultProcessFilename;
-
-	_ = grunt.util._;
 
 	// filename conversion for templates and partials
 	defaultProcessFilename = function (filePath) {
@@ -21,6 +19,7 @@ module.exports = function(grunt) {
 		return name;
 	};
 
+	// the 'handlebars' task
 	grunt.registerMultiTask('handlebars', 'Compile *.handlebars templates with given options.', function () {
 		var options = this.options({
 				separator: grunt.util.linefeed,
@@ -34,6 +33,8 @@ module.exports = function(grunt) {
 				partial: false				// specify that templates are partials
 			}),
 			compilerOptions = {},
+			known = {},
+			knownLabel = '',
 			processFilename,
 			prefix, midfix, wrapOpen, wrapClose, suffix;
 
@@ -46,7 +47,7 @@ module.exports = function(grunt) {
 			compilerOptions.knownHelpers = options.knownHelpers;
 		}
 
-		// decide template prefix
+		// decide template prefix & suffix
 		if (options.exportAMD && options.exportCommonJS) {
 			grunt.fail.warn('Cannot choose to compile as both an AMD and a CommonJS module. Please remove either the \'exportAMD\' or \'exportCommonJS\' option from your Gruntfile.js.');
 		} else if (options.exportAMD) {
@@ -65,12 +66,31 @@ module.exports = function(grunt) {
 			suffix = '}());';
 		}
 
+		// decide template midfix
 		midfix = 'var template = Handlebars.template, templates = ' + options.namespace + ' = ' + options.namespace + ' || {};\n';
-
-		// decide template suffix
 
 		// assign filename processing (this decides template name under namespace)
 		processFilename = options.processFilename || defaultProcessFilename;
+
+		// convert known helpers array/list to an object literal
+		if (options.knownHelpers && !Array.isArray(options.knownHelpers)) {
+			options.knownHelpers = [options.knownHelpers];
+		}
+
+		if (options.knownHelpers && options.knownHelpers.length > 0) {
+			for (var i = 0; i < options.knownHelpers.length; i += 1) {
+				known[options.knownHelpers[i]] = true;
+				knownLabel += (i !== options.knownHelpers.length - 1) ? options.knownHelpers[i] + ', ' : options.knownHelpers[i];
+			}
+
+			grunt.log.writeln('Compiling with known helpers: ');
+			grunt.log.ok(knownLabel);
+
+			compilerOptions = {
+				'knownHelpers': known,
+				'knownHelpersOnly': options.knownOnly
+			};
+		}
 
 		this.files.forEach(function (f) {
 			var partials = [],
@@ -104,20 +124,21 @@ module.exports = function(grunt) {
 				filepath = filepath.join('/');
 				filename = processFilename(filepath);
 
+
 				try {
-					compiled = require('handlebars').precompile(src);
+					compiled = require('handlebars').precompile(src, compilerOptions);
 				} catch (e) {
 					grunt.log.error(e);
 					grunt.fail.warn('Handlebars failed to compile '+filepath+'.');
 				}
 
-				// source is compiled at this point, let us reconstruct		
-				// decide template wrapping
+				// source is compiled at this point, let us reconstruct and decide wrappings
 				if (options.partials) {
 					wrapOpen = 'Handlebars.partials[\'' + filename + '\'] = template(';
 				} else {
 					wrapOpen = 'templates[\'' + filename + '\'] = template(';
 				}
+
 				wrapClose = ');\n';
 
 				// finally, put it all back together

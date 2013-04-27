@@ -11,7 +11,7 @@ exports.handlebars = function (test) {
 		{
 			name: 'vanilla',
 			prefix: '',
-			assertion: 'The vanilla compiled output should match the clean (prepped) build'
+			assertion: 'The vanilla (no options) compiled output should match the clean (prepped) build'
 		},
 		{
 			name: 'namespace',
@@ -32,6 +32,11 @@ exports.handlebars = function (test) {
 			name: 'templateRoot',
 			prefix: '-templateRoot',
 			assertion: 'The templateRoot should have been stripped to match the clean (prepped) build'
+		},
+		{
+			name: 'knownHelpers',
+			prefix: '-knownHelpers',
+			assertion: 'The output compiled with known helpers should match the clean (prepped) build'
 		}
 	];
 

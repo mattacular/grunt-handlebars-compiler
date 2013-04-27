@@ -19,7 +19,8 @@ module.exports = function (grunt) {
 		},
 		// before generating any new files, remove any previously-created files.
 		clean: {
-			tests: ['tmp']
+			tests: ['tmp'],
+			expected: ['test/expected']
 		},
 		// test configuration
 		handlebars: {
@@ -65,6 +66,16 @@ module.exports = function (grunt) {
 					namespace: 'myApp.templates'
 				}
 			},
+			// test known helpers option
+			knownHelpers: {
+				files: {
+					'tmp/out-knownHelpers.compiled.js': 'test/fixtures/helloWorld-helpers.handlebars'
+				},
+				options: {
+					'knownHelpers': ['if', 'each']
+				}
+			},
+			// test partials option
 			prepVanilla: {
 				'files': {
 					'test/expected/helloWorld.compiled.js': 'test/fixtures/helloWorld.handlebars'
@@ -101,6 +112,14 @@ module.exports = function (grunt) {
 				options: {
 					templateRoot: 'hello' 
 				}
+			},
+			prepKnownHelpers: {
+				files: {
+					'test/expected/helloWorld-knownHelpers.compiled.js': 'test/fixtures/helloWorld-helpers.handlebars'
+				},
+				options: {
+					'knownHelpers': ['if', 'each']
+				}
 			}
 		},
 		// test suite
@@ -117,10 +136,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-internal');
 
 	// 'prepTest' should be run once a stable build has been confirmed (ie. creates new 'expected' files)
-	grunt.registerTask('prepTest', ['clean', 'handlebars:prepVanilla', 'handlebars:prepNamespace', 'handlebars:prepTemplateRoot', 'handlebars:prepExportAMD', 'handlebars:prepExportCommonJS']);
+	grunt.registerTask('prep', ['clean:expected', 'handlebars:prepVanilla', 'handlebars:prepNamespace', 'handlebars:prepTemplateRoot', 'handlebars:prepExportAMD', 'handlebars:prepExportCommonJS', 'handlebars:prepKnownHelpers']);
 	// run tests with nodeunit
-	grunt.registerTask('test', ['clean', 'handlebars:vanilla', 'handlebars:namespace', 'handlebars:templateRoot', 'handlebars:exportAMD', 'handlebars:exportCommonJS', 'nodeunit']);
+	grunt.registerTask('test', ['clean:tests', 'handlebars:vanilla', 'handlebars:namespace', 'handlebars:templateRoot', 'handlebars:exportAMD', 'handlebars:exportCommonJS', 'handlebars:knownHelpers', 'nodeunit']);
 	// lint and test before declaring a revision stable
 	grunt.registerTask('default', ['jshint', 'test']);
-
 };

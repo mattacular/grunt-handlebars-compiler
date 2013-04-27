@@ -49,7 +49,8 @@ This allows you to use the 'handlebars' task to specify targets!
 			},
 			options: {
 				namespace: 'myApp.templates',
-				templateRoot: 'webApp-'
+				templateRoot: 'webApp-',
+				knownHelpers: ['if', 'each']
 			}
 		}
 	}
@@ -65,9 +66,9 @@ The `handlebars` task has the following options, none of which are required. The
 		exportCommonJS: false,				// export as Common JS, provide string path to Handlebars instead of false
 		pathToHandlebars: '',				// only relevant if 'exportAMD === true' - provide path to Handlebars
 		knownHelpers: [],					// provide an array of known helpers
-		knownOnly: false,					// compile known helpers only (requires 'knownHelpers')
+		knownOnly: false,					// compile with known helpers only (requires 'knownHelpers')
 		templateRoot: false,				// a value to strip from the beginning of template names
-		partial: false						// specify that templates these templates are partials
+		partial: false						// EXPERIMENTAL: specify that templates these templates are partials
 	}
 ```
 
@@ -76,12 +77,6 @@ Note: You may choose only one 'exportX' option. *(Eg. you can't use exportAMD an
 ## Documentation
 
 The `handlebars` task is a [multi task](https://github.com/gruntjs/grunt/blob/master/docs/types_of_tasks.md#multi-tasks), meaning that it will implicitly iterate over all of its targets if no target is specified.
-
-## Changelog
-
-* v0.0.6: added various options, including ability to export as AMD or Common JS modules
-* v0.0.5: tests!
-* v0.0.1: Initial release (alpha)
 
 ## Contributing
 
