@@ -68,7 +68,7 @@ The `handlebars` task has the following options, none of which are required. The
 		knownHelpers: [],					// provide an array of known helpers
 		knownOnly: false,					// compile with known helpers only (requires 'knownHelpers')
 		templateRoot: false,				// a value to strip from the beginning of template names
-		partial: false						// EXPERIMENTAL: specify that templates these templates are partials
+		partial: false						// EXPERIMENTAL: specify that target templates are partials
 	}
 ```
 
