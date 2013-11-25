@@ -9,6 +9,7 @@ module.exports = function(grunt) {
 	'use strict';
 	
 	var _ = grunt.util._,
+		uglify = require('uglify-js'),
 		defaultProcessFilename;
 
 	// filename conversion for templates and partials
@@ -30,7 +31,8 @@ module.exports = function(grunt) {
 				knownHelpers: [],			// provide an array of known helpers
 				knownOnly: false,			// compile known helpers only
 				templateRoot: false,		// base value to strip from template names
-				partial: false				// specify that templates are partials
+				partial: false,				// specify that templates are partials
+				min: false					// minify output
 			}),
 			compilerOptions = {},
 			known = {},
@@ -124,7 +126,6 @@ module.exports = function(grunt) {
 				filepath = filepath.join('/');
 				filename = processFilename(filepath);
 
-
 				try {
 					compiled = require('handlebars').precompile(src, compilerOptions);
 				} catch (e) {
@@ -143,6 +144,7 @@ module.exports = function(grunt) {
 
 				// finally, put it all back together
 				compiled = prefix + midfix + wrapOpen + compiled + wrapClose + suffix;
+
 				templates.push(compiled);
 			});
 
@@ -151,11 +153,16 @@ module.exports = function(grunt) {
 			if (output.length < 1) {
 				grunt.log.warn('Destination not written because there was no output.');
 			} else {
-				grunt.file.write(f.dest, output.join(grunt.util.normalizelf(options.separator)));
+				output = output.join(grunt.util.normalizelf(options.separator));
+
+				if (options.min) {
+					output = uglify.minify(output, { fromString: true }).code;
+				}
+
+				grunt.file.write(f.dest, output);
 				grunt.log.writeln('File "' + f.dest + '" created.');
 			}
+
 		});
-
 	});
-
 };

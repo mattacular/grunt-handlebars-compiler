@@ -37,6 +37,11 @@ exports.handlebars = function (test) {
 			name: 'knownHelpers',
 			prefix: '-knownHelpers',
 			assertion: 'The output compiled with known helpers should match the clean (prepped) build'
+		},
+		{
+			name: 'min',
+			prefix: '-min',
+			assertion: 'The output compiled with minified option should match the clean (prepped) build'
 		}
 	];
 

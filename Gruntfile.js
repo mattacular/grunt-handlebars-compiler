@@ -75,6 +75,15 @@ module.exports = function (grunt) {
 					'knownHelpers': ['if', 'each']
 				}
 			},
+			// test min option
+			min: {
+				files: {
+					'tmp/out-min.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					min: true
+				}
+			},
 			// test partials option
 			prepVanilla: {
 				'files': {
@@ -120,6 +129,14 @@ module.exports = function (grunt) {
 				options: {
 					'knownHelpers': ['if', 'each']
 				}
+			},
+			prepMin: {
+				files: {
+					'test/expected/helloWorld-min.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					'min': true
+				}
 			}
 		},
 		// test suite
@@ -136,9 +153,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-internal');
 
 	// 'prepTest' should be run once a stable build has been confirmed (ie. creates new 'expected' files)
-	grunt.registerTask('prep', ['clean:expected', 'handlebars:prepVanilla', 'handlebars:prepNamespace', 'handlebars:prepTemplateRoot', 'handlebars:prepExportAMD', 'handlebars:prepExportCommonJS', 'handlebars:prepKnownHelpers']);
+	grunt.registerTask('prep', ['clean:expected', 'handlebars:prepVanilla', 'handlebars:prepNamespace', 'handlebars:prepTemplateRoot', 'handlebars:prepExportAMD', 'handlebars:prepExportCommonJS', 'handlebars:prepKnownHelpers', 'handlebars:prepMin']);
 	// run tests with nodeunit
-	grunt.registerTask('test', ['clean:tests', 'handlebars:vanilla', 'handlebars:namespace', 'handlebars:templateRoot', 'handlebars:exportAMD', 'handlebars:exportCommonJS', 'handlebars:knownHelpers', 'nodeunit']);
+	grunt.registerTask('test', ['clean:tests', 'handlebars:vanilla', 'handlebars:namespace', 'handlebars:templateRoot', 'handlebars:exportAMD', 'handlebars:exportCommonJS', 'handlebars:knownHelpers', 'handlebars:min', 'nodeunit']);
 	// lint and test before declaring a revision stable
 	grunt.registerTask('default', ['jshint', 'test']);
 };
