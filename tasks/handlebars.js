@@ -147,12 +147,9 @@ module.exports = function(grunt) {
 
 				templates.push(compiled);
 			});
-			if (templates.length < 1) {
-				grunt.log.warn('Destination not written because there was no output.');
-			} else {
-				templates = templates.join(grunt.util.normalizelf(options.separator));
+			
+			templates = templates.join(grunt.util.normalizelf(options.separator));
 
-			}
 			var wrappedTemplates = prefix + midfix + templates + suffix;
 
 			output = partials.concat(wrappedTemplates);
