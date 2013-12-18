@@ -143,22 +143,23 @@ module.exports = function(grunt) {
 				wrapClose = ');\n';
 
 				// finally, put it all back together
-				compiled = prefix + midfix + wrapOpen + compiled + wrapClose + suffix;
+				compiled = wrapOpen + compiled + wrapClose;
 
 				templates.push(compiled);
 			});
+			
+			templates = templates.join(grunt.util.normalizelf(options.separator));
 
-			output = partials.concat(templates);
+			var wrappedTemplates = prefix + midfix + templates + suffix;
+
+			output = partials.concat(wrappedTemplates);
 
 			if (output.length < 1) {
 				grunt.log.warn('Destination not written because there was no output.');
 			} else {
-				output = output.join(grunt.util.normalizelf(options.separator));
-
 				if (options.min) {
 					output = uglify.minify(output, { fromString: true }).code;
 				}
-
 				grunt.file.write(f.dest, output);
 				grunt.log.writeln('File "' + f.dest + '" created.');
 			}

@@ -42,7 +42,10 @@ module.exports = function (grunt) {
 			// strip template root option
 			exportAMD: {
 				files: {
-					'tmp/out-exportAMD.compiled.js': 'test/fixtures/helloWorld.handlebars'
+					'tmp/out-exportAMD.compiled.js': [
+	                    'test/fixtures/helloWorld.handlebars', 
+	                    'test/fixtures/helloWorldTwo.handlebars'
+	                ] 
 				},
 				options: {
 					exportAMD: true
