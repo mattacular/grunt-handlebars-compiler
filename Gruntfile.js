@@ -43,9 +43,9 @@ module.exports = function (grunt) {
 			exportAMD: {
 				files: {
 					'tmp/out-exportAMD.compiled.js': [
-	                    'test/fixtures/helloWorld.handlebars', 
-	                    'test/fixtures/helloWorldTwo.handlebars'
-	                ] 
+						'test/fixtures/helloWorld.handlebars',
+						'test/fixtures/helloWorldTwo.handlebars'
+					]
 				},
 				options: {
 					exportAMD: true
@@ -94,35 +94,38 @@ module.exports = function (grunt) {
 				}
 			},
 			prepNamespace: {
-				files: { 
-					'test/expected/helloWorld-namespace.compiled.js': 'test/fixtures/helloWorld.handlebars' 
+				files: {
+					'test/expected/helloWorld-namespace.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				},
 				options: {
-					namespace: 'myApp.templates' 
+					namespace: 'myApp.templates'
 				}
 			},
 			prepExportCommonJS: {
-				files: { 
-					'test/expected/helloWorld-exportCommonJS.compiled.js': 'test/fixtures/helloWorld.handlebars' 
+				files: {
+					'test/expected/helloWorld-exportCommonJS.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				},
 				options: {
-					exportCommonJS: 'handlebars' 
+					exportCommonJS: 'handlebars'
 				}
 			},
 			prepExportAMD: {
-				files: { 
-					'test/expected/helloWorld-exportAMD.compiled.js': 'test/fixtures/helloWorld.handlebars' 
+				files: {
+					'test/expected/out-exportAMD.compiled.js': [
+						'test/fixtures/helloWorld.handlebars',
+						'test/fixtures/helloWorldTwo.handlebars'
+					]
 				},
 				options: {
 					exportAMD: true
 				}
 			},
 			prepTemplateRoot: {
-				files: { 
-					'test/expected/helloWorld-templateRoot.compiled.js': 'test/fixtures/helloWorld.handlebars' 
+				files: {
+					'test/expected/helloWorld-templateRoot.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				},
 				options: {
-					templateRoot: 'hello' 
+					templateRoot: 'hello'
 				}
 			},
 			prepKnownHelpers: {
