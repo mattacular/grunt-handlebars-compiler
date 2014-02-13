@@ -111,7 +111,7 @@ module.exports = function (grunt) {
 			},
 			prepExportAMD: {
 				files: {
-					'test/expected/out-exportAMD.compiled.js': [
+					'test/expected/helloWorld-exportAMD.compiled.js': [
 						'test/fixtures/helloWorld.handlebars',
 						'test/fixtures/helloWorldTwo.handlebars'
 					]
