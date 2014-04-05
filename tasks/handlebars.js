@@ -28,6 +28,7 @@ module.exports = function(grunt) {
 				exportAMD: false,
 				exportCommonJS: false,
 				pathToHandlebars: '',		// only relevant to 'exportAMD: true' - amd style option
+				returnAMD: false,			// only relevant to 'exportAMD: true' - return the module directly for use
 				knownHelpers: [],			// provide an array of known helpers
 				knownOnly: false,			// compile known helpers only
 				templateRoot: false,		// base value to strip from template names
@@ -53,7 +54,7 @@ module.exports = function(grunt) {
 		if (options.exportAMD && options.exportCommonJS) {
 			grunt.fail.warn('Cannot choose to compile as both an AMD and a CommonJS module. Please remove either the \'exportAMD\' or \'exportCommonJS\' option from your Gruntfile.js.');
 		} else if (options.exportAMD) {
-			prefix = 'define([\'' + options.pathToHandlebars + 'handlebars\'], function (Handlebars) {\n';
+			prefix = 'define([\'' + (options.pathToHandlebars || 'handlebars') + '\'], function (Handlebars) {\n';
 			grunt.log.writeln('Compiling as AMD/RequireJS module(s).');
 			suffix = '});';
 		} else if (options.exportCommonJS) {
@@ -140,7 +141,13 @@ module.exports = function(grunt) {
 					wrapOpen = 'templates[\'' + filename + '\'] = template(';
 				}
 
-				wrapClose = ');\n';
+				// This optionally returns the template as well as adding it to the Handlebars.templates object for immediate use in AMD modules
+				if (options.returnAMD)
+				{
+					wrapClose = ');return templates[\''+filename+'\'];\n';
+				} else {
+					wrapClose = ');\n';
+				}
 
 				// finally, put it all back together
 				compiled = wrapOpen + compiled + wrapClose;
