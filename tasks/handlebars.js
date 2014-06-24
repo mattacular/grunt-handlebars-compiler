@@ -56,17 +56,17 @@ module.exports = function (grunt) {
 		} else if (options.exportAMD) {
 			prefix = 'define([\'' + options.pathToHandlebars + 'handlebars\'], function (Handlebars) {\n';
 			grunt.log.writeln('Compiling as AMD/RequireJS module(s).');
-			suffix = options.returnTemplates ? 'return templates;});' : '});';
+			suffix = options.returnTemplates ? 'return templates;\n});' : '});';
 		} else if (options.exportCommonJS) {
 			if (typeof options.exportCommonJS !== 'string') {
 				grunt.fail.warn('Must provide a path to Handlebars module in order to compile as a CommonJS module.');
 			}
 			grunt.log.writeln('Compiling as Common JS module(s).');
 			prefix = 'var Handlebars = require(\'' + options.exportCommonJS + '\');\n';
-			suffix = options.returnTemplates ? 'return templates;' : '';
+			suffix = options.returnTemplates ? 'module.exports = templates;' : '';
 		} else {
 			prefix = '(function() {\n';
-			suffix = options.returnTemplates ? 'return templates;}());' : '}());';
+			suffix = options.returnTemplates ? 'return templates;\n}());' : '}());';
 		}
 
 		// decide template midfix
