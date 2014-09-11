@@ -53,7 +53,7 @@ exports.handlebars = function (test) {
 		actual = grunt.file.read('tmp/out' + activeTest.prefix + '.compiled.js');
 		expected = grunt.file.read('test/expected/helloWorld' + activeTest.prefix + '.compiled.js');
 
-		test.equal(actual, expected, activeTest.assertion);
+		test.equal(actual, expected, activeTest.assertion + ' - suffix: ' + activeTest.prefix);
 	}
 
 	test.done();

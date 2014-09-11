@@ -7,7 +7,7 @@
  */
 module.exports = function(grunt) {
 	'use strict';
-	
+
 	var _ = grunt.util._,
 		uglify = require('uglify-js'),
 		defaultProcessFilename;
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 		} else if (options.exportAMD) {
 			prefix = 'define([\'' + options.pathToHandlebars + 'handlebars\'], function (Handlebars) {\n';
 			grunt.log.writeln('Compiling as AMD/RequireJS module(s).');
-			suffix = '});';
+			suffix = 'return templates;\n});';
 		} else if (options.exportCommonJS) {
 			if (typeof options.exportCommonJS !== 'string') {
 				grunt.fail.warn('Must provide a path to Handlebars module in order to compile as a CommonJS module.');
@@ -147,10 +147,11 @@ module.exports = function(grunt) {
 
 				templates.push(compiled);
 			});
-			
+
 			templates = templates.join(grunt.util.normalizelf(options.separator));
 
 			var wrappedTemplates = prefix + midfix + templates + suffix;
+			wrappedTemplates = wrappedTemplates.replace(/\s+$/mg, '') + '\n';
 
 			output = partials.concat(wrappedTemplates);
 
