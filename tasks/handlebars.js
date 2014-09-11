@@ -151,6 +151,7 @@ module.exports = function(grunt) {
 			templates = templates.join(grunt.util.normalizelf(options.separator));
 
 			var wrappedTemplates = prefix + midfix + templates + suffix;
+			wrappedTemplates = wrappedTemplates.replace(/\s+$/mg, '') + '\n';
 
 			output = partials.concat(wrappedTemplates);
 
