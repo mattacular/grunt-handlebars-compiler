@@ -12,6 +12,11 @@ exports.handlebars = function (test) {
 			name: 'vanilla',
 			prefix: '',
 			assertion: 'The vanilla (no options) compiled output should match the clean (prepped) build'
+		},		
+		{
+			name: 'vanilla',
+			prefix: '-returnTemplates',
+			assertion: 'The vanilla (with option returnTemplates set to true) compiled output should match the clean (prepped) build'
 		},
 		{
 			name: 'namespace',
@@ -24,9 +29,19 @@ exports.handlebars = function (test) {
 			assertion: 'The output compiled as a AMD module should match the clean (prepped) build'
 		},
 		{
+			name: 'exportAMD',
+			prefix: '-exportAMDWithReturnTemplates',
+			assertion: 'The output compiled as a AMD module (with option returnTemplates set to true) should match the clean (prepped) build'
+		},
+		{
 			name: 'exportCommonJS',
 			prefix: '-exportCommonJS',
 			assertion: 'The output compiled as a Common JS module should match the clean (prepped) build'
+		},
+		{
+			name: 'exportCommonJS',
+			prefix: '-exportCommonJSWithReturnTemplates',
+			assertion: 'The output compiled as a Common JS module (with option returnTemplates set to true) should match the clean (prepped) build'
 		},
 		{
 			name: 'templateRoot',

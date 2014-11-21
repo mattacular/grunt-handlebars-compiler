@@ -30,6 +30,15 @@ module.exports = function (grunt) {
 					'tmp/out.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				}
 			},
+			// a vanilla run-through with option returnTemplates set to true
+			vanillaWithReturnTemplates: {
+				files: {
+					'tmp/out-returnTemplates.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					returnTemplates: true
+				}
+			},
 			// strip template root option
 			templateRoot: {
 				files: {
@@ -51,6 +60,18 @@ module.exports = function (grunt) {
 					exportAMD: true
 				}
 			},
+			exportAMDWithReturnTemplates: {
+				files: {
+					'tmp/out-exportAMDWithReturnTemplates.compiled.js': [
+						'test/fixtures/helloWorld.handlebars',
+						'test/fixtures/helloWorldTwo.handlebars'
+					]
+				},
+				options: {
+					exportAMD: true,
+					returnTemplates: true
+				}
+			},
 			// strip template root option
 			exportCommonJS: {
 				files: {
@@ -58,6 +79,15 @@ module.exports = function (grunt) {
 				},
 				options: {
 					exportCommonJS: 'handlebars'
+				}
+			},
+			exportCommonJSWithReturnTemplates: {
+				files: {
+					'tmp/out-exportCommonJSWithReturnTemplates.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					exportCommonJS: 'handlebars',
+					returnTemplates: true
 				}
 			},
 			// test namespace option
@@ -93,6 +123,15 @@ module.exports = function (grunt) {
 					'test/expected/helloWorld.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				}
 			},
+			// test returnTemplates option
+			prepVanillaWithReturnTemplates: {
+				'files': {
+					'test/expected/helloWorldWithTemplates.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					returnTemplates: true
+				}
+			},
 			prepNamespace: {
 				files: {
 					'test/expected/helloWorld-namespace.compiled.js': 'test/fixtures/helloWorld.handlebars'
@@ -109,6 +148,15 @@ module.exports = function (grunt) {
 					exportCommonJS: 'handlebars'
 				}
 			},
+			prepExportCommonJSWithReturnTemplates: {
+				files: {
+					'test/expected/helloWorld-exportCommonJS.compiled.js': 'test/fixtures/helloWorld.handlebars'
+				},
+				options: {
+					exportCommonJS: 'handlebars',
+					returnTemplates: true
+				}
+			},
 			prepExportAMD: {
 				files: {
 					'test/expected/helloWorld-exportAMD.compiled.js': [
@@ -118,6 +166,18 @@ module.exports = function (grunt) {
 				},
 				options: {
 					exportAMD: true
+				}
+			},
+			prepExportAMDWithReturnTemplates: {
+				files: {
+					'test/expected/helloWorld-exportAMDWithReturnTemplates.compiled.js': [
+						'test/fixtures/helloWorld.handlebars',
+						'test/fixtures/helloWorldTwo.handlebars'
+					]
+				},
+				options: {
+					exportAMD: true,
+					returnTemplates: true
 				}
 			},
 			prepTemplateRoot: {
@@ -159,9 +219,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-internal');
 
 	// 'prepTest' should be run once a stable build has been confirmed (ie. creates new 'expected' files)
-	grunt.registerTask('prep', ['clean:expected', 'handlebars:prepVanilla', 'handlebars:prepNamespace', 'handlebars:prepTemplateRoot', 'handlebars:prepExportAMD', 'handlebars:prepExportCommonJS', 'handlebars:prepKnownHelpers', 'handlebars:prepMin']);
+	grunt.registerTask('prep', ['clean:expected', 'handlebars:prepVanilla', 'handlebars:prepVanillaWithReturnTemplates', 'handlebars:prepNamespace', 'handlebars:prepTemplateRoot', 'handlebars:prepExportAMD', 'handlebars:prepExportAMDWithReturnTemplates', 'handlebars:prepExportCommonJS', 'handlebars:prepExportCommonJSWithReturnTemplates', 'handlebars:prepKnownHelpers', 'handlebars:prepMin']);
 	// run tests with nodeunit
-	grunt.registerTask('test', ['clean:tests', 'handlebars:vanilla', 'handlebars:namespace', 'handlebars:templateRoot', 'handlebars:exportAMD', 'handlebars:exportCommonJS', 'handlebars:knownHelpers', 'handlebars:min', 'nodeunit']);
+	grunt.registerTask('test', ['clean:tests', 'handlebars:vanilla', 'handlebars:vanillaWithReturnTemplates', 'handlebars:namespace', 'handlebars:templateRoot', 'handlebars:exportAMD', 'handlebars:exportAMDWithReturnTemplates', 'handlebars:exportCommonJS', 'handlebars:exportCommonJSWithReturnTemplates', 'handlebars:knownHelpers', 'handlebars:min', 'nodeunit']);
 	// lint and test before declaring a revision stable
 	grunt.registerTask('default', ['jshint', 'test']);
 };
