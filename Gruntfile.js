@@ -126,7 +126,7 @@ module.exports = function (grunt) {
 			// test returnTemplates option
 			prepVanillaWithReturnTemplates: {
 				'files': {
-					'test/expected/helloWorldWithTemplates.compiled.js': 'test/fixtures/helloWorld.handlebars'
+					'test/expected/helloWorld-returnTemplates.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				},
 				options: {
 					returnTemplates: true
@@ -150,7 +150,7 @@ module.exports = function (grunt) {
 			},
 			prepExportCommonJSWithReturnTemplates: {
 				files: {
-					'test/expected/helloWorld-exportCommonJS.compiled.js': 'test/fixtures/helloWorld.handlebars'
+					'test/expected/helloWorld-exportCommonJSWithReturnTemplates.compiled.js': 'test/fixtures/helloWorld.handlebars'
 				},
 				options: {
 					exportCommonJS: 'handlebars',
