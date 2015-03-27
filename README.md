@@ -4,7 +4,7 @@ A [Grunt](http://gruntjs.com) plugin for pre-compiling Handlebars templates to a
 
 ## Getting Started
 
-***IMPORTANT**: This plugin requires Grunt 0.4 or higher - it is recommended that you always run the latest version
+***IMPORTANT***: This plugin requires Grunt 0.4 or higher - it is recommended that you always run the latest version
 
 Install the task:
 
@@ -36,8 +36,8 @@ This allows you to use the 'handlebars' task to specify targets!
 		},
 		some: {
 			/*
-				The output will be set to register two templates under 'myApp.templates' namespace after 
-				stripping the templateRoot:
+				The output will be set to register two templates under 'myApp.templates' 
+				namespace after stripping the templateRoot:
 					* myApp.templates.template1
 					* myApp.templates.template2
 			*/
@@ -60,16 +60,28 @@ The `handlebars` task has the following options, none of which are required. The
 
 ```js
 	{
-		separator: '\n',					// specify a character to delimit individual compiled files in the output
-		namespace: 'Handlebars.templates',	// specify a namespace for templates to be set to register to
-		exportAMD: false,					// export compiled templates as AMD (RequireJS) module
-		exportCommonJS: false,				// export as Common JS, provide string path to Handlebars instead of false
-		pathToHandlebars: '',				// only relevant if 'exportAMD === true' - provide path to Handlebars
-		knownHelpers: [],					// provide an array of known helpers
-		knownOnly: false,					// compile with known helpers only (requires 'knownHelpers')
-		templateRoot: false,				// a value to strip from the beginning of template names
-		partial: false,						// EXPERIMENTAL: specify that target templates are partials
-		returnTemplates: false				// return templates
+		// specify a character to delimit individual compiled files in the output	
+		separator: '\n',				
+		// specify a namespace for templates to be set to register to
+		namespace: 'Handlebars.templates',
+		// export compiled templates as AMD (RequireJS) module
+		exportAMD: false,				
+		// export as Common JS, provide string path to Handlebars instead of false
+		exportCommonJS: false,			
+		// only relevant if 'exportAMD === true' - provide path to Handlebars
+		pathToHandlebars: '',			
+		// provide an array of known helpers
+		knownHelpers: [],				
+		// compile with known helpers only (requires 'knownHelpers')
+		knownOnly: false,				
+		// a value to strip from the beginning of template names
+		templateRoot: false,			
+		// EXPERIMENTAL: specify that target templates are partials
+		partial: false,					
+		// return templates
+		returnTemplates: false,			
+		// only relevant if 'exportAMD: true' - return the module directly for use
+		returnAMD: false				
 	}
 ```
 
