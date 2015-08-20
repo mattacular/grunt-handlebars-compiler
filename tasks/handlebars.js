@@ -71,7 +71,7 @@ module.exports = function (grunt) {
 		}
 
 		// decide template midfix
-		midfix = 'var template = Handlebars.template, templates = ' + options.namespace + ' = ' + options.namespace + ' || {};\n';
+		midfix = 'var template = Handlebars.template, templates = ' + (options.namespace ? options.namespace + ' = ' + options.namespace + ' || {}' : '{}') + ';\n';
 
 		// assign filename processing (this decides template name under namespace)
 		processFilename = options.processFilename || defaultProcessFilename;
