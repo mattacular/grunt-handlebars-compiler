@@ -36,16 +36,16 @@ This allows you to use the 'handlebars' task to specify targets!
 		},
 		some: {
 			/*
-				The output will be set to register two templates under 'myApp.templates' 
+				The output will be set to register two templates under 'myApp.templates'
 				namespace after stripping the templateRoot:
 					* myApp.templates.template1
 					* myApp.templates.template2
 			*/
 			files: {
 				'pkg/template-compile-test2.js': [
-					'template/webApp-template1.handlebars', 
+					'template/webApp-template1.handlebars',
 					'template/webApp-template2.handlebars'
-				] 
+				]
 			},
 			options: {
 				namespace: 'myApp.templates',
@@ -60,7 +60,7 @@ The `handlebars` task has the following options, none of which are required. The
 
 ```js
 	{
-		// specify a character to delimit individual compiled files in the output	
+		// specify a character to delimit individual compiled files in the output
 		separator: '\n',				
 		// specify a namespace for templates to be set to register to
 		namespace: 'Handlebars.templates',
@@ -90,6 +90,10 @@ Note: You may choose only one 'exportX' option. *(Eg. you can't use exportAMD an
 ## Documentation
 
 The `handlebars` task is a [multi task](https://github.com/gruntjs/grunt/blob/master/docs/types_of_tasks.md#multi-tasks), meaning that it will implicitly iterate over all of its targets if no target is specified.
+
+## Testing
+
+The test suite can be run using `grunt test`, which uses [Nodeunit](https://github.com/caolan/nodeunit)
 
 ## Contributing
 
