@@ -1,7 +1,7 @@
 {
   "name": "grunt-handlebars-compiler",
   "description": "Grunt task to precompile Handlebars.js templates with same options as the CLI utility",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "homepage": "https://github.com/mattacular/grunt-handlebars-compiler",
   "author": {
     "name": "Matt Stills",
