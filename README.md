@@ -81,7 +81,11 @@ The `handlebars` task has the following options, none of which are required. The
 		// return templates
 		returnTemplates: false,			
 		// only relevant if 'exportAMD: true' - return the module directly for use
-		returnAMD: false				
+		returnAMD: false
+		// uses Handlebars whitespace control to compress HTML (but not Handlebars syntax; you'll have to do that yourself)
+		compress: false
+		// uses UglifyJS to minify the compiled output
+		min: false
 	}
 ```
 
