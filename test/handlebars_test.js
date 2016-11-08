@@ -57,6 +57,11 @@ exports.handlebars = function (test) {
 			name: 'min',
 			prefix: '-min',
 			assertion: 'The output compiled with minified option should match the clean (prepped) build'
+		},
+		{
+			name: 'compress',
+			prefix: '-compress',
+			assertion: 'The output compiled with compress option should match the clean (prepped) build'
 		}
 	];
 

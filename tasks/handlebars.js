@@ -34,6 +34,7 @@ module.exports = function (grunt) {
 				templateRoot: false,		// base value to strip from template names
 				partial: false,				// specify that templates are partials
 				min: false,					// minify output
+				compress: false,            // experimental: compress whitespace (by prepending {{!~}} to each indented line)
 				returnTemplates: false		// return templates
 			}),
 			compilerOptions = {},
@@ -127,6 +128,18 @@ module.exports = function (grunt) {
 
 				filepath = filepath.join('/');
 				filename = processFilename(filepath);
+
+				if (options.compress) {
+					src = src.split("\n");
+
+					for (var i = 0; i < src.length; i++) {
+						if (src[i].charAt(0) !== '<') {
+							src[i] = '{{!~}}' + src[i];
+						}
+					}
+
+					src = src.join("\n");
+				}
 
 				try {
 					compiled = require('handlebars').precompile(src, compilerOptions);
