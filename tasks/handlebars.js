@@ -32,7 +32,7 @@ module.exports = function (grunt) {
 				knownHelpers: [],			// provide an array of known helpers
 				knownOnly: false,			// compile known helpers only
 				templateRoot: false,		// base value to strip from template names
-				partial: false,				// specify that templates are partials
+				partials: false,			// specify that templates are partials
 				min: false,					// minify output
 				compress: false,            // experimental: compress whitespace (by prepending {{!~}} to each indented line)
 				returnTemplates: false		// return templates
