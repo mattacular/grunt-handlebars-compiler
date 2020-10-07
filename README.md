@@ -4,7 +4,7 @@ A [Grunt](http://gruntjs.com) plugin for pre-compiling Handlebars templates to a
 
 ## Getting Started
 
-***IMPORTANT***: This plugin requires Grunt 0.4 or higher - it is recommended that you always run the latest version
+***IMPORTANT***: This plugin requires Grunt 1.3.0 or higher - it is recommended that you always run the latest version
 
 Install the task:
 
