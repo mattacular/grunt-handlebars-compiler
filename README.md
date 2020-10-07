@@ -106,7 +106,6 @@ Feel free to fork if you see possible improvements or contact me directly if you
 ## Author
 
 * [Matt Stills](http://www.mattstills.com)
-  [![@mattacular on Twitter](https://secure.gravatar.com/avatar/fc34dc6cf17121952e967cdba43f76fe?s=70)](http://twitter.com/mattacular "Follow @mattacular on Twitter")
 
 ## License
 
