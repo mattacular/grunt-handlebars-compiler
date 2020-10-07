@@ -77,7 +77,7 @@ The `handlebars` task has the following options, none of which are required. The
 		// a value to strip from the beginning of template names
 		templateRoot: false,			
 		// EXPERIMENTAL: specify that target templates are partials
-		partial: false,					
+		partials: false,					
 		// return templates
 		returnTemplates: false,			
 		// only relevant if 'exportAMD: true' - return the module directly for use

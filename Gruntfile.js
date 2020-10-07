@@ -221,7 +221,7 @@ module.exports = function (grunt) {
 				options: {
 					compress: true
 				}
-			},
+			}
 		},
 		// test suite
 		nodeunit: {
